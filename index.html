@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#080a0d">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d10">
+<title>Scorer Blueprint — Faith Edition</title>
+<style>
+:root{--bg:#080a0d;--card:#11151b;--card2:#171c24;--text:#f5f7fa;--muted:#9ba4b1;--line:#28303a;--accent:#f4f4f4;--good:#7ee787}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#080a0d,#0d1117);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:720px;margin:auto;padding:20px 16px 70px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-weight:900;letter-spacing:.5px}.pill{font-size:12px;color:#111;background:#fff;padding:7px 10px;border-radius:999px;font-weight:800}
+h1{font-size:31px;line-height:1.05;margin:8px 0}.sub{color:var(--muted);margin:0 0 20px}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}.nav button{background:var(--card);border:1px solid var(--line);color:var(--text);padding:13px;border-radius:14px;font-weight:800}
+.nav button.active{background:#fff;color:#0b0d10}.card{background:rgba(17,21,27,.96);border:1px solid var(--line);border-radius:20px;padding:17px;margin:12px 0}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.title{font-weight:900;font-size:18px}.muted{color:var(--muted);font-size:13px}
+.progress{height:9px;background:#252c35;border-radius:99px;overflow:hidden;margin-top:12px}.bar{height:100%;background:#f4f4f4;width:0;transition:.25s}
+.task{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}
+input[type=checkbox]{width:21px;height:21px;accent-color:#fff}.task span{flex:1}.done{text-decoration:line-through;color:#77808c}
+textarea{width:100%;min-height:130px;background:#0b0e12;border:1px solid var(--line);border-radius:14px;color:var(--text);padding:12px;resize:vertical}
+button{cursor:pointer}.quote{font-size:19px;line-height:1.4;font-weight:700}.verse{color:var(--muted);font-size:13px;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--card2);padding:15px;border-radius:15px}.num{font-size:25px;font-weight:900}.label{font-size:12px;color:var(--muted)}
+.smallbtn{border:1px solid var(--line);background:var(--card2);color:var(--text);padding:9px 11px;border-radius:10px;font-weight:800}
+footer{text-align:center;color:#66707d;font-size:11px;margin-top:25px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">SCORER BLUEPRINT</div><div class="pill">FAITH EDITION</div></div>
+  <h1>Build the player.<br>Build the person.</h1>
+  <p class="sub">Train hard. Recover well. Make time for God.</p>
+
+  <div class="nav">
+    <button id="basketBtn" class="active" onclick="show('basket')">🏀 Basketball</button>
+    <button id="faithBtn" onclick="show('faith')">✝️ Faith</button>
+  </div>
+
+  <section id="basket">
+    <div class="card">
+      <div class="row"><div><div class="title">Today's Training</div><div class="muted" id="bdate"></div></div><div class="pill" id="bcount">0 / 8</div></div>
+      <div class="progress"><div class="bar" id="bbar"></div></div>
+    </div>
+    <div class="card">
+      <div class="title">Daily Scorer Checklist</div>
+      <div id="basketTasks"></div>
+    </div>
+    <div class="card">
+      <div class="row"><div class="title">Recovery</div><button class="smallbtn" onclick="resetSection('basket')">Reset day</button></div>
+      <p class="muted">Mobility, hydration, sleep, and taking care of your body are part of becoming a better player.</p>
+      <div id="recoveryTasks"></div>
+    </div>
+  </section>
+
+  <section id="faith" class="hidden">
+    <div class="card">
+      <div class="row"><div><div class="title">Today's Faith Check-In</div><div class="muted" id="fdate"></div></div><div class="pill" id="fcount">0 / 4</div></div>
+      <div class="progress"><div class="bar" id="fbar"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="title">Daily Scripture</div>
+      <p class="quote">“Trust in the LORD with all thine heart; and lean not unto thine own understanding.”</p>
+      <div class="verse">Proverbs 3:5</div>
+    </div>
+
+    <div class="card">
+      <div class="title">Spend Time With God</div>
+      <div id="faithTasks"></div>
+    </div>
+
+    <div class="card">
+      <div class="title">Prayer & Reflection</div>
+      <p class="muted">Write what you're thankful for, what you're asking God for, or what stood out while reading Scripture.</p>
+      <textarea id="journal" placeholder="Write your prayer or reflection here..."></textarea>
+    </div>
+    <div class="card">
+      <div class="row"><div class="title">Faith Streak</div><button class="smallbtn" onclick="resetSection('faith')">Reset today</button></div>
+      <div class="grid">
+        <div class="stat"><div class="num" id="faithDays">0</div><div class="label">completed today</div></div>
+        <div class="stat"><div class="num" id="faithPct">0%</div><div class="label">today's progress</div></div>
+      </div>
+    </div>
+  </section>
+  <footer>Your routine is a tool — consistency, character, and faith are built one day at a time.</footer>
+</div>
+<script>
+const key='scorer-faith-v1';
+const data=JSON.parse(localStorage.getItem(key)||'{}');
+const today=new Date().toLocaleDateString();
+if(data.date!==today){data.date=today;data.basket={};data.faith={};data.journal='';save()}
+const basket=[
+'Morning mobility / activation',
+'Skill work: handle + change of pace',
+'Shot creation: pull-ups + game-speed reps',
+'Finishing: both hands + touch',
+'Reads: attack, pull-up, floater, kick',
+'Competitive / game-like reps',
+'Free throws under fatigue',
+'Write one thing to improve tomorrow'
+];
+const recovery=['Hydrate throughout the day','5–10 min easy mobility','Get a full night of sleep'];
+const faith=['Read your Bible','Spend intentional time praying','Write one thing you are thankful for','Apply one thing you learned today'];
+function save(){localStorage.setItem(key,JSON.stringify(data))}
+function renderTasks(id,list,section){
+ const el=document.getElementById(id);el.innerHTML='';
+ list.forEach((t,i)=>{
+  const row=document.createElement('label');row.className='task';
+  const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!data[section][i];
+  const sp=document.createElement('span');sp.textContent=t;if(cb.checked)sp.className='done';
+  cb.onchange=()=>{data[section][i]=cb.checked;save();render();};
+  row.append(cb,sp);el.appendChild(row);
+ });
+}
+function render(){
+ document.getElementById('bdate').textContent=today;document.getElementById('fdate').textContent=today;
+ renderTasks('basketTasks',basket,'basket');renderTasks('recoveryTasks',recovery,'recovery');renderTasks('faithTasks',faith,'faith');
+ const bc=basket.filter((_,i)=>data.basket[i]).length, fc=faith.filter((_,i)=>data.faith[i]).length;
+ document.getElementById('bcount').textContent=bc+' / '+basket.length;document.getElementById('bbar').style.width=(bc/basket.length*100)+'%';
+ document.getElementById('fcount').textContent=fc+' / '+faith.length;document.getElementById('fbar').style.width=(fc/faith.length*100)+'%';
+ document.getElementById('faithDays').textContent=fc;document.getElementById('faithPct').textContent=Math.round(fc/faith.length*100)+'%';
+ document.getElementById('journal').value=data.journal||'';
+}
+function show(which){document.getElementById('basket').classList.toggle('hidden',which!=='basket');document.getElementById('faith').classList.toggle('hidden',which!=='faith');document.getElementById('basketBtn').classList.toggle('active',which==='basket');document.getElementById('faithBtn').classList.toggle('active',which==='faith')}
+function resetSection(section){data[section]={};if(section==='faith')data.journal='';save();render()}
+document.getElementById('journal').addEventListener('input',e=>{data.journal=e.target.value;save()});
+render();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script>
+</body></html>
